@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="callAPI()">Call API</button>
+    <script>
+        function callAPI() {
+            const authUrl = 'https://community.cloud.automationanywhere.digital/v1/authentication';
+            const deployUrl = 'https://community.cloud.automationanywhere.digital/v3/automations/deploy';
+
+            // Create the request body for authentication
+            const authBody = JSON.stringify({
+                "username": "nilay.ganatra@vsourz.com",
+                "password": "Nil_ganu123@"
+            });
+
+            // Make the authentication API call
+            fetch(authUrl, {
+                method: 'POST',
+                mode: 'cors',
+                headers: {
+                    'Access-Control-Allow-Origin':'*',
+                    'Access-Control-Allow-Methods':'*',
+                    'Access-Control-Allow-Headers':'*',
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin':'*'
+                },
+                body: authBody
+            })           
+                .then(data => {
+                    // Extract the token from the response
+                    const token = data.token;
+                    console.log('Token:', token);
+
+                    // Create the request body for bot deployment
+                    const deployBody = JSON.stringify({
+                        // Provide the necessary parameters for bot deployment
+                        "fileId": 9358025, //id of the bot to execute
+                        "runAsUserIds": [
+                          541232 //id(s) of the user account to run the bot - must have default device unless specified below
+                        ],
+                        "poolIds": [],
+                        "overrideDefaultDevice": false,
+                        // "callbackInfo": {
+                        //   "url": "https://callbackserver.com/storeBotExecutionStatus", //Callback URL - not required, but can be used - can be removed if no callback needed
+                        //   "headers": {
+                        //     "X-Authorization": "{{token}}" //Callback API headers. Headers may contain authentication token, content type etc. Both key & value are of type string.
+                        //   }
+                        // }
+                        "botInput": { }
+
+                    });
+
+                    // Make the bot deploy API call with the token
+                    fetch(deployUrl, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: {
+                            'Access-Control-Allow-Origin':'*',
+                            'Access-Control-Allow-Methods':'*',
+                            'Access-Control-Allow-Headers':'*',
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: deployBody
+                    })
+                        .then(response => {
+                            console.log('Bot Deploy Response:', response);
+                            // Further actions after bot deployment
+                        })
+                        .catch(error => {
+                            // Handle any errors
+                            console.error('Bot Deploy Error:', error);
+                        });
+                })
+                .catch(error => {
+                    // Handle any authentication errors
+                    console.error('Authentication Error:', error);
+                });
+        }
+    </script>
+</body>
+</html>
