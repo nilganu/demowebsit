@@ -21,9 +21,9 @@
             // Make the authentication API call
             fetch(authUrl, {
                 method: 'POST',
-               
+              mode: 'no-cors',
                 headers: {
-                    'cors':'no-cors',
+                    
                     'Content-Type': 'application/json',
                     'Access-Control-Allow-Origin':'*'
                 },
@@ -56,7 +56,7 @@
                     // Make the bot deploy API call with the token
                     fetch(deployUrl, {
                         method: 'POST',
-                      
+                      mode: 'no-cors',
                         headers: {
                             'Content-Type': 'application/json',
                             'Authorization': `Bearer ${token}`
