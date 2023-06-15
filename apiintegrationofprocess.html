@@ -9,8 +9,8 @@
     <button onclick="callAPI()">Call API</button>
     <script>
         function callAPI() {
-            const authUrl = 'https://trial.cloud.automationanywhere.digital/v1/authentication';
-            const deployUrl = 'https://trial.cloud.automationanywhere.digital/v3/automations/deploy';
+            const authUrl = 'https://community.cloud.automationanywhere.digital/v1/authentication';
+            const deployUrl = 'https://community.cloud.automationanywhere.digital/v3/automations/deploy';
 
             // Create the request body for authentication
             const authBody = JSON.stringify({
@@ -31,7 +31,7 @@
             })           
                 .then(data => {
                     // Extract the token from the response
-                    const token = data.token;
+                    const token = 'eyJhbGciOiJSUzUxMiJ9.eyJzdWIiOiI1NDEyMzIiLCJjbGllbnRUeXBlIjoiV0VCIiwidGVuYW50VXVpZCI6IjgxMTg1OWJiLTI1MmUtNDkxYi1hZDNkLTFlNDhjOWUzMGViNiIsImh5YnJpZFRlbmFudCI6IiIsIm11bHRpcGxlTG9naW4iOmZhbHNlLCJpYXQiOjE2ODY3OTYzODYsImV4cCI6MTY4Njc5NzU4NiwiaXNzIjoiQXV0b21hdGlvbkFueXdoZXJlIiwibmFub1RpbWUiOjYzMzM5MTYwMTYwMjc3NX0.eThTWPW2J5Rm4D3gLfmi8HUJoxGa0nZtPSWSw0WIzlpVWqg79eHTpB4iPdw6U5ikpNeCKyu2ZHQW5-4if65mLeKaN0_p9ZcQKi2JPbYqRln-WCvk1lr8tXtxeIixmLAcxjJLqaGCfmlDzX08gvmtN3LaxT-E1JXb48-cdr6JSLZ0XiKQjjZpib2lziAI8yt3DU20JpVpRfwiR5jt0PgHj4nJlWEakJyqMIgJixCDZcammCNPSS_NqLM4HuIK1aSaYBUA5n4ZdALsD4zKWKG-VzibsP6HOvyfK7l0cDUD9y81f1JgplyNma5RVxMjjZmNMY9OslYb5VFnlqcRHd-F6A';
                     console.log('Token:', token);
 
                     // Create the request body for bot deployment
